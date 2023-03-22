@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Leva } from "leva";
+import { Canvas } from "@react-three/fiber";
+import Experience from "./experience";
+
+const onCreated = (state: any) => {
+  state.gl.domElement.style.position = "absolute";
+  state.gl.domElement.style.zIndex = 10;
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Leva hidden={true} />
+      <Canvas
+        eventSource={document.getElementById("root") as any}
+        camera={{
+          fov: 55,
+          near: 0.1,
+          far: 2000,
+          position: [4, 3.5, 6],
+        }}
+        onCreated={onCreated as any}
+      >
+        <Experience />
+      </Canvas>
+    </>
   );
 }
 
